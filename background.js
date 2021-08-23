@@ -10,28 +10,30 @@ function notification(title, content) {
   return { title, content };
 }
 
-
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    if (key === "state") { // on state change
 
-    if (key === "state") {
-      //clean last notification timeout if it exists
+      // clean last notification timeout if it exists
       if (notificationID) {
         clearTimeout(notificationID);
         notificationID = null;
       }
-      //if is running set timeout to show a notification on the end of 'timeLeft'
+
+      // if is running set timeout to show a notification on the end of 'timeLeft'
       if (newValue.running) {
         var notificationMess = timeIntervalMessage[newValue.interval];
         notificationID = setTimeout(function () {
-          //show the notification depending on the type of interval
+
+          // show the notification depending on the type of interval
           chrome.notifications.create({
             "type": "basic",
             "iconUrl": "img/tomato48.png",
             "title": notificationMess.title,
             "message": notificationMess.content
           });
-          //stop the clock from keep running over negative time (because that makes no sense)
+
+          // stop the clock from keep running over negative time (because that makes no sense)
           newValue.running = false;
           newValue.timeLeft = 0;
           chrome.storage.local.set({ 'state': newValue }, function () {
@@ -40,12 +42,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         }, newValue.timeLeft);
       }
     }
-
-    //test: checking values
-    //console.log(
-    //`Storage key "${key}" in namespace "${namespace}" changed.`,
-    //`Old value was "${oldValue}", new value is "${newValue}".`
-    //);
   }
 });
 
@@ -77,8 +73,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 //}
 //});
 //});
-
-
 
 
 ///*
