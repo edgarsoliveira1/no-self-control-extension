@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    "name": "No Self Control",
+    "version": "1.0",
+    "description": "A open-source extension for blocked sites and Pomodoro Timer!",
+    "permissions": [
+        "tabs",
+        "storage",
+        "notifications"
+    ],
+    "browser_action": {
+        "default_popup": "browser_action/popup.html",
+        "browser_style": true,
+        "default_icon": {
+            "16": "img/tomato16.png",
+            "32": "img/tomato32.png",
+            "48": "img/tomato48.png"
+        }
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content-script.js"
+            ]
+        }
+    ],
+    "options_ui": {
+        "page": "options_ui/options.html",
+        "open_in_tab": false
+    }
+}
