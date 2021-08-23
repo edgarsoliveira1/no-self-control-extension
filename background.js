@@ -6,6 +6,10 @@ var notificationID = null,
     test: notification("Test Title", "Test Content"),
   };
 
+function notification(title, content) {
+  return { title, content };
+}
+
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
@@ -20,19 +24,19 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
       if (newValue.running) {
         var notificationMess = timeIntervalMessage[newValue.interval];
         notificationID = setTimeout(function () {
+          //show the notification depending on the type of interval
           chrome.notifications.create({
             "type": "basic",
             "iconUrl": "img/tomato48.png",
             "title": notificationMess.title,
             "message": notificationMess.content
           });
-
+          //stop the clock from keep running over negative time (because that makes no sense)
           newValue.running = false;
           newValue.timeLeft = 0;
           chrome.storage.local.set({ 'state': newValue }, function () {
             console.log("State is storaged as:", newValue);
           });
-
         }, newValue.timeLeft);
       }
     }
@@ -98,7 +102,3 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 //Assign `notify()` as a listener to messages from the content script.
 //*/
 //browser.runtime.onMessage.addListener(notify);
-
-function notification(title, content) {
-  return { title, content };
-}
