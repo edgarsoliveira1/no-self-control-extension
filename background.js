@@ -10,36 +10,35 @@ function notification(title, content) {
   return { title, content };
 }
 
+// When the state change
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     if (key === "state") { // on state change
-
-      // clean last notification timeout if it exists
-      if (notificationID) {
-        clearTimeout(notificationID);
-        notificationID = null;
-      }
-
-      // if is running set timeout to show a notification on the end of 'timeLeft'
+      // verify if it's running so:
       if (newValue.running) {
         var notificationMess = timeIntervalMessage[newValue.interval];
+        // set timeout to  when the time is over:
         notificationID = setTimeout(function () {
-
-          // show the notification depending on the type of interval
+          // show a notification
           chrome.notifications.create({
             "type": "basic",
             "iconUrl": "img/tomato48.png",
             "title": notificationMess.title,
             "message": notificationMess.content
           });
-
-          // stop the clock from keep running over negative time (because that makes no sense)
+          // and stop the clock
           newValue.running = false;
           newValue.timeLeft = 0;
           chrome.storage.local.set({ 'state': newValue }, function () {
             console.log("State is storaged as:", newValue);
           });
         }, newValue.timeLeft);
+      } else { // if is not running:
+        // check if if there's a timeout ON and stop it
+        if (notificationID) {
+          clearTimeout(notificationID);
+          notificationID = null;
+        }
       }
     }
   }
