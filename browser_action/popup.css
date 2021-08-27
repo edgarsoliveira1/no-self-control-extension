@@ -1,10 +1,14 @@
 :root {
     /* Colors */
-    --red: #f8333c;
-    --background: #f7f7f2;
-    --foreground: #46494c;
-    --border-radius: 70px;
-    --box-shadow: 8px 8px 13px #cbcbc6, -8px -8px 13px #ffffff;
+    --text: #000;
+    --background: #EEE;
+    --foreground: #040026;
+    --box-shadow: 8px 8px 13px #000000;
+    --WORK: #EEE;
+    --BREAK: #EEE;
+    --LONG: #EEE;
+    --border-radius: 5px;
+    --border: 2px solid #000;
 }
 
 *,
@@ -13,41 +17,34 @@
     box-sizing: border-box;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Patrick+Hand");
+* {
+    font-family: "Patrick Hand";
+}
+
+html {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background-color: var(--background);
     color: var(--foreground);
     display: grid;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    place-items: center;
     font-size: 1rem;
     font-weight: 400;
     height: 100%;
     line-height: 1.5;
     margin: 0;
-    place-items: center;
-}
-
-:root {
-    /* Colors */
-    --red: #f8333c;
-    --background: #f7f7f2;
-    --foreground: #46494c;
-    --border-radius: 70px;
-    --box-shadow: 8px 8px 13px #cbcbc6, -8px -8px 13px #ffffff;
-}
-
-.p {
-    margin-bottom: 1rem;
-    margin-top: 0;
-    ;
-}
-
-.title {
-    margin-top: 0;
-    font-size: 25px;
 }
 
 .timer {
     font-size: 3rem;
+    color: var(--text);
 }
 
 .flex-gap * {
@@ -67,27 +64,54 @@ body {
 }
 
 .timer-card {
+    background-color: var(--background);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    border: var(--border);
     margin-bottom: 1.75rem;
     width: 16rem;
     padding: 2.75rem 1.15rem;
+    color: var(--text);
 }
 
 .btn {
+    background-color: var(--background);
+    color: var(--text);
     border: none;
-    padding: 1.75rem;
-    border-radius: 25px;
-    box-shadow: var(--box-shadow);
+    padding: 12px;
     user-select: none;
     cursor: pointer;
+    text-decoration: underline;
 }
 
-.btn:hover {
+.clickable:hover {
     transform: scale(1.1);
     transition-duration: 5ms;
 }
 
 .btn:active {
     transform: translate(0, 5px);
+}
+
+.button-group {
+    display: flex;
+}
+
+.button-group * {
+    padding: 5px;
+    margin: 1px;
+    user-select: none;
+    cursor: pointer;
+    background-color: var(--BREAK);
+    color: var(--text);
+    text-decoration: underline;
+}
+
+.button-group *:last-of-type {
+    border-radius: 0 .7em .7em 0;
+    background-color: var(--LONG);
+}
+
+.button-group *:first-of-type {
+    border-radius: .7em 0 0 .7em;
+    background-color: var(--WORK);
 }
