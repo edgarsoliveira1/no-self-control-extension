@@ -1,12 +1,17 @@
 var title = document.getElementById('title'),
   timer = document.getElementById('timer'),
+  resquestID = null,
   startButton = document.getElementById('start'),
   resetButton = document.getElementById('reset'),
-  resquestID = null,
+  intervelButtons = {
+    work: document.getElementById('work'),
+    break: document.getElementById('break'),
+    long: document.getElementById('long'),
+  },
   timeInterval = {
     work: 1000 * 60 * 25, // 25 mins
     break: 1000 * 60 * 5, // 5 mins
-    longBreak: 1000 * 60 * 15, // 15 mins
+    long: 1000 * 60 * 15, // 15 mins
     test: 1000 * 60 * 1, // 1 mins
   },
   worksForALongBreak = 2,
@@ -18,20 +23,20 @@ var title = document.getElementById('title'),
   };
 state.timeLeft = timeInterval[state.interval];
 
-chrome.storage.local.get(['state'], function (result) {
+chrome.storage.local.get(['state'], function(result) {
   state = result.state || state;
-  console.log("State setted to:", state);
+  //console.log("State setted to:", state);
   updateTimerDisplay(state.timeLeft);
   if (state.running) {
     startClock();
   }
 });
 
-window.onblur = function () {
+window.onblur = function() {
   saveState();
 }
 
-startButton.onclick = function () {
+startButton.onclick = function() {
   //check it's running
   if (state.running) {
     stopClock();
@@ -43,11 +48,31 @@ startButton.onclick = function () {
   saveState();
 };
 
-resetButton.onclick = function () {
+resetButton.onclick = function() {
   stopClock();
+  //console.log(state.interval);
   state.timeLeft = timeInterval[state.interval];
   updateTimerDisplay(state.timeLeft);
 };
+
+Object.keys(intervelButtons).forEach(function(intervalKey) {
+  intervelButtons[intervalKey].onclick = function() {
+    state.interval = intervalKey;
+    resetButton.onclick();
+
+  }
+})
+workButton.onclick = function() {}
+
+breakButton.onclick = function() {
+  state.interval = 'break';
+  resetButton.onclick();
+}
+
+longButton.onclick = function() {
+  state.interval = 'long';
+  resetButton.onclick();
+}
 
 function startClock() {
   startButton.innerHTML = "Stop";
@@ -57,11 +82,12 @@ function startClock() {
 
   //Start Update Display Loop
   state.running = true;
+
   function updateTimeLeftandDisplay() {
     if (!state.running) {
       return;
     }
-    
+
     state.timeLeft = state.deadLine - Date.now();
     if (state.timeLeft <= 0) {
       state.running = false;
@@ -69,7 +95,7 @@ function startClock() {
       return;
     }
     updateTimerDisplay(state.timeLeft);
-    
+
     requestAnimationFrame(updateTimeLeftandDisplay);
   }
   requestAnimationFrame(updateTimeLeftandDisplay);
@@ -103,8 +129,8 @@ function updateTimerDisplay(timeLeft) {
   timer.innerHTML = timeToString(time.minute) + ":" + timeToString(time.second);
 };
 
-function saveState(){
-  chrome.storage.local.set({ 'state': state }, function () {
-    console.log("State is storaged as:", state);
+function saveState() {
+  chrome.storage.local.set({ 'state': state }, function() {
+    //console.log("State is storaged as:", state);
   });
 }
