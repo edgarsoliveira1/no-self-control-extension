@@ -1,0 +1,118 @@
+:root {
+    /* Colors */
+    --text: #000;
+    --background: #EEE;
+    --foreground: #040026;
+    --box-shadow: 8px 8px 13px #000000;
+    --WORK: #EEE;
+    --BREAK: #EEE;
+    --LONG: #EEE;
+    --border-radius: 5px;
+    --border: 2px solid #000;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Patrick+Hand");
+* {
+    font-family: "Patrick Hand";
+}
+
+html {
+    /*
+    border: var(--border);
+    border-radius: var(--border-radius);
+    */
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    font-weight: 400;
+    height: 100%;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.timer {
+    font-size: 3rem;
+    color: var(--text);
+}
+
+.flex-gap * {
+    margin: 10px;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.box {
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    border: var(--border);
+    margin-bottom: 1.75rem;
+    padding: 2.75rem 1.15rem;
+    color: var(--text);
+}
+
+.btn {
+    background-color: var(--background);
+    color: var(--text);
+    border: none;
+    padding: 12px;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.clickable:hover {
+    transform: scale(1.1);
+    transition-duration: 5ms;
+}
+
+.btn:active {
+    transform: translate(0, 5px);
+}
+
+.button-group {
+    display: flex;
+}
+
+.button-group * {
+    padding: 5px;
+    margin: 1px;
+    user-select: none;
+    cursor: pointer;
+    background-color: var(--BREAK);
+    color: var(--text);
+    text-decoration: underline;
+}
+
+.button-group *:last-of-type {
+    border-radius: 0 .7em .7em 0;
+    background-color: var(--LONG);
+}
+
+.button-group *:first-of-type {
+    border-radius: .7em 0 0 .7em;
+    background-color: var(--WORK);
+}
