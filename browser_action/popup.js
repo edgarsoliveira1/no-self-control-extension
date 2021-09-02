@@ -62,17 +62,6 @@ Object.keys(intervelButtons).forEach(function(intervalKey) {
 
   }
 })
-workButton.onclick = function() {}
-
-breakButton.onclick = function() {
-  state.interval = 'break';
-  resetButton.onclick();
-}
-
-longButton.onclick = function() {
-  state.interval = 'long';
-  resetButton.onclick();
-}
 
 function startClock() {
   startButton.innerHTML = "Stop";
