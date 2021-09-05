@@ -34,7 +34,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
           newValue.running = false;
           newValue.timeLeft = 0;
           chrome.storage.local.set({ 'state': newValue }, function() {
-            console.log('State is storaged as:', newValue);
+            //console.log('State is storaged as:', newValue);
           });
         }, newValue.timeLeft);
       } else { // if is not running:
@@ -68,7 +68,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
   }
 
   const hostname = new URL(url).hostname;
-  console.log(hostname);
 
   chrome.storage.local.get(['blocked', 'enabled'], function(local) {
     const { blocked, enabled } = local;
@@ -85,7 +84,7 @@ Then display a notification. The notification contains the URL,
 which we read from the message.
 */
 function notify(message) {
-  console.log('background script received message');
+  //console.log('background script received message');
   var title = chrome.i18n.getMessage('notificationTitle');
   var content = chrome.i18n.getMessage('notificationContent', message.url);
   chrome.notifications.create({

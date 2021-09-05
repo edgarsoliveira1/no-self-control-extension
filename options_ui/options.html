@@ -2,20 +2,21 @@
 <html>
 
 <head>
-    <title>Block Site</title>
+  <title>Blocked Sites</title>
+  <link rel="stylesheet" href="options.css">
+  <link rel="icon" href="../img/tomato.svg">
 </head>
 
-<body>
+<body class="flex-center">
 
-    <h1>Block Site</h1>
+  <h3>No-Self-Control</h3>
+  <h4>Blocked Sites</h4>
+  <div class="box blocked flex-center" id="blocked-sites">
+    <div class="flex-center btn" id="add" title="add a new url">+</div>
+  </div>
+  <div class="flex-center btn" id="save" title="save changes">Save</div>
 
-    <textarea id="textarea" rows="10" cols="30" spellcheck="false"></textarea>
-    <br>
-
-    <button id="save">Save</button>
-    <strong>Enabled?</strong><input id="checkbox" type="checkbox">
-
-    <script src="options.js"></script>
+  <script src="options.js"></script>
 </body>
 
 </html>

@@ -48,7 +48,16 @@ body {
 }
 
 .flex-gap * {
-    margin: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.flex-long-gap {
+    width: 100%;
+}
+
+.flex-long-gap *:last-child {
+    margin-left: auto !important;
 }
 
 .flex-row {
@@ -60,6 +69,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.padding {
     padding: 15px;
 }
 
@@ -74,7 +86,7 @@ body {
 }
 
 .btn {
-    background-color: var(--background);
+    background-color: transparent;
     color: var(--text);
     border: none;
     padding: 12px;
@@ -114,4 +126,26 @@ body {
 .button-group *:first-of-type {
     border-radius: .7em 0 0 .7em;
     background-color: var(--WORK);
+}
+
+.foot {
+    padding: 0;
+    margin: 0;
+    margin-bottom: -25px;
+    border: 2px solid black;
+    border-radius: var(--border-radius);
+    width: 125%;
+}
+
+.foot * {
+    background-color: transparent;
+    border-radius: var(--border-radius);
+}
+
+.foot *:last-child {
+    padding-right: 20px;
+}
+
+.foot *:first-child {
+    padding-left: 20px;
 }
