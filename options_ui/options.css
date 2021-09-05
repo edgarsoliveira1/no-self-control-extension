@@ -1,0 +1,93 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EEE;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.flex-gap * {
+    margin: 10px;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.box {
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+.sub-box {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.blocked {
+    min-width: 350px;
+    min-height: 230px;
+}
+
+.btn {
+    margin: 10px;
+    text-decoration: underline;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.modal-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 35px;
+}
+
+.modal-title {
+    margin: 0;
+}
+
+.modal-field {
+    width: 90%;
+    margin: 5% 0% 5% 5%;
+    height: 25px;
+    text-align: center;
+}
+
+.modal-btn {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.margin-right {
+    margin-right: 5px !important;
+    margin-left: -5px !important;
+}
