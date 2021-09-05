@@ -3,6 +3,8 @@ var title = document.getElementById('title'),
   resquestID = null,
   startButton = document.getElementById('start'),
   resetButton = document.getElementById('reset'),
+  blockedSitesButton = document.getElementById('blocked_sites'),
+  blockSiteButton = document.getElementById('block_site'),
   intervelButtons = {
     work: document.getElementById('work'),
     break: document.getElementById('break'),
@@ -54,6 +56,30 @@ resetButton.onclick = function() {
   state.timeLeft = timeInterval[state.interval];
   updateTimerDisplay(state.timeLeft);
 };
+
+blockedSitesButton.onclick = function() {
+  chrome.tabs.create({ url: '/options_ui/options.html' });
+}
+
+blockSiteButton.onclick = function() {
+  chrome.tabs.query({ 'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT },
+    function(tabs) {
+      //get just the hostname
+      var hostname = new URL(tabs[0].url).hostname;
+      //check if valid
+      if (!hostname)
+        return;
+      //add the hostname as a blocked site
+      chrome.storage.local.get(['blocked'], function(result) {
+        var blocked = result.blocked;
+        if (Array.isArray(blocked)) {
+          blocked.push(hostname);
+          chrome.storage.local.set({ blocked: blocked });
+        }
+      });
+    }
+  );
+}
 
 Object.keys(intervelButtons).forEach(function(intervalKey) {
   intervelButtons[intervalKey].onclick = function() {
