@@ -18,6 +18,12 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
       //if the current intervel is equal to 'work' enable the site block
       chrome.storage.local.set({ enabled: (newValue.interval === 'work') });
 
+      // check if if there's a timeout ON and stop it
+      if (notificationID) {
+        clearTimeout(notificationID);
+        notificationID = null;
+      }
+
       // verify if it's running so:
       if (newValue.running) {
         var notificationMess = timeIntervalMessage[newValue.interval];
@@ -37,12 +43,6 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
             //console.log('State is storaged as:', newValue);
           });
         }, newValue.timeLeft);
-      } else { // if is not running:
-        // check if if there's a timeout ON and stop it
-        if (notificationID) {
-          clearTimeout(notificationID);
-          notificationID = null;
-        }
       }
     }
   }
