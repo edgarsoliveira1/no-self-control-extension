@@ -91,7 +91,8 @@ function notify(message) {
     'type': 'basic',
     'iconUrl': chrome.extension.getURL('icons/link-48.png'),
     'title': title,
-    'message': content
+    'message': content,
+    'silent': false,
   });
 }
 
