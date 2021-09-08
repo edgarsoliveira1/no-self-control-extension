@@ -102,6 +102,6 @@ function closeModal() {
 function createElement(tag, className, innerHTML) {
   var newElement = document.createElement(tag);
   newElement.className = className;
-  newElement.innerHTML = innerHTML || '';
+  newElement.textContext = innerHTML || '';
   return newElement;
 }

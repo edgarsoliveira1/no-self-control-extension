@@ -151,7 +151,7 @@ function timeToString(n) {
 
 function updateTimerDisplay(timeLeft) {
   var time = msTodividedTime(timeLeft);
-  timer.innerHTML = timeToString(time.minute) + ":" + timeToString(time.second);
+  timer.textContent = timeToString(time.minute) + ":" + timeToString(time.second);
 };
 
 function saveState() {
